@@ -7,6 +7,8 @@ import MultiActionAreaCard from './Components/Service/page'
 import Accordion from './Components/Faqs/page'
 
 function App() {
+
+  
   return (
     <div className='main'>
 
