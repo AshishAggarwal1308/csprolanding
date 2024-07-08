@@ -5,6 +5,7 @@ import QuiltedImageList from './Components/Whyus/page'
 import TickerTape from './Components/Ticker/page'
 import MultiActionAreaCard from './Components/Service/page'
 import Accordion from './Components/Faqs/page'
+import Ticker from './Components/Certificate/page'
 
 function App() {
 
@@ -36,6 +37,10 @@ function App() {
         <QuiltedImageList />
       </div>
       <MultiActionAreaCard/>
+      <div style={{padding:'40px'}}>
+        <h1>Our <span style={{ color: '#AE1D3C' }}>Certifications</span></h1>
+      </div>
+      <Ticker/>
       <div className='faqs'>
           <h1>Read Our<span style={{ color: '#AE1D3C' }}>FAQ's</span></h1>
           <p>To help you find the answers you need quickly and easily, we've compiled a comprehensive list of frequently asked questions. From detailed information about our services to insights on how we can help your business grow, our FAQs cover it all.</p>
