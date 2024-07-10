@@ -1,10 +1,15 @@
-.formbtn {
+.formbtn link{
     border-radius: 4px;
     padding: 16px 0px;
     background-color: transparent;
     color: #AE1D3C;
     border: 1px solid #AE1D3C;
     font-size: 20px;
+    text-decoration: none;
+}
+.formbtn Link:visited{
+    text-decoration: none;
+
 }
 
 .formbtn:hover {

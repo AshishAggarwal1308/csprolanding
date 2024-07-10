@@ -6,13 +6,17 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Page() {
+    const navigation=useNavigate()
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         phone: ''
     });
+
+
 
     const handleChange = (e) => {
         setFormData({
@@ -44,22 +48,24 @@ export default function Page() {
         e.preventDefault();
         if (!validateForm()) return;
 
-        try {
-            const response = await axios.post(`http://localhost:8000/api/v1/register`, {
-                FullName: formData.name,
-                Email: formData.email,
-                Phone: formData.phone
-            });
+    
+        // try {
+        //     const response = await axios.post(`http://localhost:8000/api/v1/register`, {
+        //         FullName: formData.name,
+        //         Email: formData.email,
+        //         Phone: formData.phone
+        //     });
 
-            console.log(response.data)
-            if (response.status === 201) {
-                toast.success('User registered successfully');
-            } else {
-                toast.error(response.data.message);
-            }
-        } catch (error) {
-            toast.error(error.response.data.message);
-        }
+        //     console.log(response.data)
+        //     if (response.status === 201) {
+        //         toast.success('User registered successfully');
+
+        //     } else {
+        //         toast.error(response.data.message);
+        //     }
+        // } catch (error) {
+        //     toast.error(error.response.data.message);
+        // }
     };
 
     return (
@@ -105,7 +111,11 @@ export default function Page() {
                     value={formData.phone}
                     onChange={handleChange}
                 />
-                <Button type="submit" variant="contained" className='formbtn'>Submit</Button>
+                
+                <Button type="submit" variant="contained" className='formbtn' style={{ backgroundColor:'#AE1D3C'}}>
+                    
+                <Link to="/thank-you" style={{textDecoration:'none', padding:'8px 20px', color:'white', backgroundColor:'#AE1D3C'}}>Submit</Link></Button>
+                
             </div>
         </Box >
     );
