@@ -46,7 +46,7 @@ export default function Page() {
         e.preventDefault();
         if (!validateForm()) return;
         try {
-            const response = await axios.post('http://13.232.216.219:8000/api/v1/register', {
+            const response = await axios.post('https://api.csprotechnology.com/api/v1/register', {
                 FullName: formData.name,
                 Email: formData.email,
                 Phone: formData.phone
