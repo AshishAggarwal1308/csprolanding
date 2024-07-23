@@ -9,14 +9,12 @@ import './style.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Page() {
-    const navigation=useNavigate()
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         phone: ''
     });
-
-
 
     const handleChange = (e) => {
         setFormData({
@@ -47,25 +45,24 @@ export default function Page() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
+        try {
+            const response = await axios.post('http://13.232.216.219:8000/api/v1/register', {
+                FullName: formData.name,
+                Email: formData.email,
+                Phone: formData.phone
+            });
 
-    
-        // try {
-        //     const response = await axios.post(`http://localhost:8000/api/v1/register`, {
-        //         FullName: formData.name,
-        //         Email: formData.email,
-        //         Phone: formData.phone
-        //     });
 
-        //     console.log(response.data)
-        //     if (response.status === 201) {
-        //         toast.success('User registered successfully');
-
-        //     } else {
-        //         toast.error(response.data.message);
-        //     }
-        // } catch (error) {
-        //     toast.error(error.response.data.message);
-        // }
+            if (response.status === 201) {
+                toast.success('User registered successfully');
+                navigate('/thank-you'); 
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            const errorMessage = error.response?.data?.message || "Registration failed";
+            toast.error(errorMessage);
+        }
     };
 
     return (
@@ -74,7 +71,6 @@ export default function Page() {
             component="form"
             noValidate
             autoComplete="off"
-            onSubmit={handleSubmit}
         >
             <ToastContainer />
             <div className='formhead'>
@@ -83,7 +79,7 @@ export default function Page() {
                     To discuss a potential partnership, our team is here to assist you.
                 </p>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' ,gap:'24px'}}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 <TextField
                     required
                     id="outlined-required"
@@ -112,10 +108,8 @@ export default function Page() {
                     onChange={handleChange}
                 />
                 
-                <Button type="submit" variant="contained" className='formbtn' style={{ backgroundColor:'#AE1D3C'}}>
-                    
-                <Link to="/thank-you" style={{textDecoration:'none', padding:'8px 20px', color:'white', backgroundColor:'#AE1D3C'}}>Submit</Link></Button>
-                
+                <Button onClick={handleSubmit} type="submit" variant="contained" className='formbtn' style={{ backgroundColor:'#AE1D3C'}}>
+                Submit</Button>
             </div>
         </Box >
     );
